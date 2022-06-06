@@ -1,0 +1,16 @@
+spring:
+  application:
+    output:
+      ansi:
+        enabled: ALWAYS
+    name: 'prometheus-project-app-service'
+    version: '0.0.1-SNAPSHOT'
+  profiles:
+    active: native
+  cloud:
+    config:
+      uri: http://localhost:8888/
+      label: 1.0-SNAPSHOT
+      server:
+        native:
+          search-locations: file:///${user.dir}/../prometheus-project-property/{application}
