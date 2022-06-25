@@ -7,9 +7,18 @@ spring:
           lob:
             non_contextual_creation: true
         multiTenancy: SCHEMA
-        tenant_identifier_resolver: com.spring.cloud.core.service.datasource.ContextTenantIdentifierResolver
-        multi_tenant_connection_provider: com.spring.cloud.core.service.datasource.SchemaConnectionProvider
+        tenant_identifier_resolver: com.prometheus.project.core.service.datasource.ContextTenantIdentifierResolver
+        multi_tenant_connection_provider: com.prometheus.project.core.service.datasource.SchemaConnectionProvider
         generate_statistics: false
         ddl-auto: update
     generate-ddl: true
     show-sql: true
+
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
