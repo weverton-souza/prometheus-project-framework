@@ -1,6 +1,6 @@
 package com.prometheus.project.app.service.security.jwt
 
-import com.prometheus.project.app.service.service.UserAuthServiceImpl
+import com.prometheus.project.app.service.resource.service.UserAuthServiceImpl
 import java.io.IOException
 import javax.servlet.FilterChain
 import javax.servlet.ServletException
@@ -15,7 +15,8 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 class JwtAuthenticationFilter(authenticationManager: AuthenticationManager,
                               private val jwtConfiguration: JwtConfiguration,
-                              private val userService: UserAuthServiceImpl) : BasicAuthenticationFilter(authenticationManager) {
+                              private val userService: UserAuthServiceImpl
+) : BasicAuthenticationFilter(authenticationManager) {
 
     @Throws(IOException::class, ServletException::class)
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, chain: FilterChain) {

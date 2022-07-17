@@ -1,4 +1,4 @@
-package com.prometheus.project.app.service.service
+package com.prometheus.project.app.service.resource.service
 
 import com.prometheus.project.app.service.domain.UserAuth
 import com.prometheus.project.app.service.repository.UserAuthRepository

@@ -31,7 +31,7 @@ class ContextTenantIdentifierResolver: CurrentTenantIdentifierResolver {
             val requestAttributes: RequestAttributes? = RequestContextHolder.getRequestAttributes()
             if (nonNull(requestAttributes)) {
                 val tenantId =
-                    requestAttributes?.getAttribute(MultiTenant.TENANT_KEY, RequestAttributes.SCOPE_REQUEST)!! as UUID
+                    requestAttributes?.getAttribute(TenantResolverIdentifier.TENANT_KEY, RequestAttributes.SCOPE_REQUEST)!! as UUID
 
                 logger.info("""${object {}.javaClass.enclosingMethod.name}(End):: A valid Tenant was provided Tenant: $tenantId!""")
 
@@ -41,7 +41,7 @@ class ContextTenantIdentifierResolver: CurrentTenantIdentifierResolver {
 
         logger.info("""${object {}.javaClass.enclosingMethod.name}(End):: No valid Tenant was provided. In this case Default Tenant will be used!""")
 
-        return  MultiTenant.DEFAULT_TENANT
+        return  TenantResolverIdentifier.DEFAULT_TENANT
     }
 
     private fun toSchemaString(tenantId: UUID): String = "_" + UUIDConverter().toPlainString(tenantId)

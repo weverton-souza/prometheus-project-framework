@@ -13,6 +13,7 @@ group = "com.prometheus.project"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
+
 repositories {
 	mavenCentral()
 }
@@ -20,7 +21,8 @@ repositories {
 extra["springCloudVersion"] = "2021.0.3"
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-web:2.7.0")
+	implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.7.0")
+	implementation ("org.springframework.boot:spring-boot-starter-web:2.7.0")
 	implementation ("org.springframework.boot:spring-boot-starter-log4j2")
 	implementation ("org.apache.logging.log4j:log4j-slf4j-impl")
 
@@ -28,27 +30,30 @@ dependencies {
 	implementation ("org.springframework.cloud:spring-cloud-starter-config")
 	implementation ("org.springframework.cloud:spring-cloud-starter-bootstrap")
 
-	implementation("io.jsonwebtoken:jjwt:0.9.1")
-	implementation("com.google.code.gson:gson:2.9.0")
-//	implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation("org.springframework.security:spring-security-web:5.7.1")
-	implementation("org.springframework.security:spring-security-core:5.7.1")
-	implementation("org.springframework.security:spring-security-config:5.7.1")
+	implementation ("io.jsonwebtoken:jjwt:0.9.1")
+	implementation ("com.google.code.gson:gson:2.9.0")
+//	implementation ("org.springframework.boot:spring-boot-starter-security")
+	implementation ("org.springframework.security:spring-security-web:5.7.1")
+	implementation ("org.springframework.security:spring-security-core:5.7.1")
+	implementation ("org.springframework.security:spring-security-config:5.7.1")
 
-	implementation("org.springdoc:springdoc-openapi-data-rest:1.6.9")
-	implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
-	implementation("org.springdoc:springdoc-openapi-kotlin:1.6.9")
-	implementation("io.springfox:springfox-swagger2:3.0.0")
-	implementation("io.springfox:springfox-swagger-ui:3.0.0")
-	implementation("org.apache.commons:commons-lang3:3.12.0")
-	implementation("javax.validation:validation-api:2.0.1.Final")
+	implementation ("org.springdoc:springdoc-openapi-data-rest:1.6.9")
+	implementation ("org.springdoc:springdoc-openapi-ui:1.6.9")
+	implementation ("org.springdoc:springdoc-openapi-kotlin:1.6.9")
+	implementation ("io.springfox:springfox-swagger2:3.0.0")
+	implementation ("io.springfox:springfox-swagger-ui:3.0.0")
+	implementation ("org.apache.commons:commons-lang3:3.12.0")
+	implementation ("javax.validation:validation-api:2.0.1.Final")
 
-	implementation(project(":prometheus-project-core-service"))
+	// Database implementations
+	runtimeOnly ("com.h2database:h2")
+	runtimeOnly ("org.postgresql:postgresql")
+	implementation ("org.flywaydb:flyway-core:8.5.13")
+	implementation ("org.springframework.boot:spring-boot-starter-data-jpa")
 
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	runtimeOnly("org.postgresql:postgresql")
-	runtimeOnly("com.h2database:h2")
-	testImplementation("org.springframework.security:spring-security-test")
+	implementation (project (":prometheus-project-core-service"))
+
+	testImplementation ("org.springframework.security:spring-security-test")
 }
 
 dependencyManagement {
@@ -70,4 +75,12 @@ tasks.withType<Test> {
 
 configurations.all {
 	exclude(mapOf("module" to "spring-boot-starter-logging"))
+}
+
+tasks.bootJar {
+	enabled = true
+}
+
+tasks.getByName<Jar>("jar") {
+	enabled = true
 }

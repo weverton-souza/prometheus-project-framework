@@ -3,14 +3,15 @@ package com.prometheus.project.app.service.resource
 import com.google.gson.GsonBuilder
 import com.prometheus.project.app.service.domain.AuthRequest
 import com.prometheus.project.app.service.domain.AuthTO
+import com.prometheus.project.app.service.domain.Tenant
 import com.prometheus.project.app.service.domain.UserAuth
 import com.prometheus.project.app.service.enumeration.USER_RESOURCE
 import com.prometheus.project.app.service.enumeration.UserType
 import com.prometheus.project.app.service.reponse.ResponseTO
 import com.prometheus.project.app.service.request.UserAuthRequest
 import com.prometheus.project.app.service.security.jwt.JwtConfiguration
-import com.prometheus.project.app.service.service.UserAuthServiceImpl
-import com.prometheus.project.app.service.service.UserServiceImpl
+import com.prometheus.project.app.service.resource.service.UserAuthServiceImpl
+import com.prometheus.project.app.service.resource.service.UserServiceImpl
 import io.swagger.v3.oas.annotations.Operation
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -39,11 +40,11 @@ class UserAuthResourceImpl(private val userAuthService: UserAuthServiceImpl,
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(method = "POST", tags = [USER_RESOURCE], description = ":: CREATE A NEW USER AUTH ::")
-    fun register(@RequestBody userAuthRequest: UserAuthRequest): ResponseTO {
+    fun createNewUser(@RequestBody userAuthRequest: UserAuthRequest): ResponseTO {
         logger.info("""${object {}.javaClass.enclosingMethod.name}(INIT):: User Auth: 
               |${gson.toJson(userAuthRequest)}""".trimMargin())
 
-        val createdUserAuth: UserAuth = userService.createUser(userAuthRequest.toDomain())
+        val createdUserAuth: UserAuth = userService.createUser(userAuthRequest.toDomain(Tenant(comment = null)))
 
         return ResponseTO(createdUserAuth, HttpStatus.CREATED.name, HttpStatus.CREATED.reasonPhrase)
     }

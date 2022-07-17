@@ -4,6 +4,7 @@ import java.util.UUID
 import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.Id
+import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -19,7 +20,8 @@ class UserAuth(
 
     var  nickname: String,
 
-    var tenantId: String,
+    @ManyToOne
+    var tenant: Tenant,
 
     private var isAccountNonExpired: Boolean = true,
 

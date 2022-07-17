@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS tenant (
+    id varchar(36) NOT NULL,
+    key varchar(36) NOT NULL UNIQUE,
+    comment varchar(255) NULL,
+
+    CONSTRAINT PK6f13f342dfb6488db46e291cca432818 PRIMARY KEY (id),
+    CONSTRAINT UK572a294f33124832ad8875972cb3625e UNIQUE (key)
+);

@@ -2,7 +2,7 @@ package com.prometheus.project.app.service.security.configuration
 
 import com.prometheus.project.app.service.security.jwt.JwtAuthenticationFilter
 import com.prometheus.project.app.service.security.jwt.JwtConfiguration
-import com.prometheus.project.app.service.service.UserAuthServiceImpl
+import com.prometheus.project.app.service.resource.service.UserAuthServiceImpl
 import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.core.annotation.Order

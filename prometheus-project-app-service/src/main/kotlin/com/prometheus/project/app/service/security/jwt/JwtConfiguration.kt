@@ -22,7 +22,7 @@ class JwtConfiguration {
         return Jwts.builder()
             .setSubject(userAuth.username)
             .claim("X-User", userAuth.id)
-            .claim("X-Company-Tenant", userAuth.tenantId)
+            .claim("X-Company-Tenant", userAuth.tenant.key)
             .setExpiration(Date(System.currentTimeMillis() + 36000000))
             .signWith(SignatureAlgorithm.HS256, secretKey)
             .compact()

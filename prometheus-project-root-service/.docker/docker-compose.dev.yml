@@ -1,33 +1,33 @@
 version: '3'
 
 services:
-  postgresrv:
+  postgres:
     image: postgres:latest
     environment:
-      POSTGRES_DB: spring_cloud_project_store_dev
+      POSTGRES_DB: prometheus_project_dev
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cHJvbWV0aGV1cw==}
     ports:
-      - "5432:5432"
+      - "5434:5432"
     volumes:
-      - C:\\Users\\weverton.souza\\Documents\\enviroment_two\data-base\\spring-cloud-project\\postgresql:/var/lib/postgres
+      - .\\postgres:/var/lib/postgres
     networks:
-      - spring-cloud-network
+      - prometheus-project-network
 
   phpmyadmin:
     image: dpage/pgadmin4
     links:
-      - postgresrv
+      - postgres
     ports:
-      - 5000:80
+      - "5000:80"
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@admin.com}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
     depends_on:
-      - postgresrv
+      - postgres
     networks:
-      - spring-cloud-network
+      - prometheus-project-network
 
 networks:
-  spring-cloud-network:
+  prometheus-project-network:
     driver: bridge

@@ -11,7 +11,7 @@ spring:
         multi_tenant_connection_provider: com.prometheus.project.core.service.datasource.SchemaConnectionProvider
         generate_statistics: false
         ddl-auto: update
-    generate-ddl: true
+    generate-ddl: false
     show-sql: true
 
 jwt:

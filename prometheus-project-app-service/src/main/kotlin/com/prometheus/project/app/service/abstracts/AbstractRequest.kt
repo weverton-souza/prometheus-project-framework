@@ -1,3 +1,3 @@
-package com.prometheus.project.core.service.abstracts
+package com.prometheus.project.app.service.abstracts
 
 class AbstractRequest

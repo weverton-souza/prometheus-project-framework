@@ -1,6 +1,7 @@
 package com.prometheus.project.app.service.request
 
 import com.prometheus.project.app.service.domain.Authority
+import com.prometheus.project.app.service.domain.Tenant
 import com.prometheus.project.app.service.domain.UserAuth
 
 class UserAuthRequest(
@@ -10,8 +11,6 @@ class UserAuthRequest(
     private val password: String,
 
     private val  nickname: String,
-
-    private val  tenantId: String,
 
     private val isAccountNonExpired: Boolean = true,
 
@@ -25,12 +24,12 @@ class UserAuthRequest(
 
 ) {
 
-    fun toDomain(): UserAuth {
+    fun toDomain(tenant: Tenant): UserAuth {
         return UserAuth(
             username = username,
             password = password,
             nickname = nickname,
-            tenantId = tenantId,
+            tenant = tenant,
             isAccountNonExpired = isAccountNonExpired,
             isAccountNonLocked = isAccountNonLocked,
             isCredentialsNonExpired = isCredentialsNonExpired,

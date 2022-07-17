@@ -9,6 +9,9 @@ spring:
     username: postgres
     password: cHJvbWV0aGV1cw==
     driver-class-name: org.postgresql.Driver
+  flyway:
+    baselineOnMigrate: true
+    locations: db/migration,db/migration/tenants
 
 prometheus:
   security:
